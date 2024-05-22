@@ -1,49 +1,74 @@
 package org.exercise.ExceptionBooks;
 
 public class Book {
+    //ATTRIBUTES
     private String title;
-    private int numPages = 0;
-    private String writer;
+    private int numPages;
+    private String author;
     private String publisher;
 
-    //    COSTRUTTORE
-    public Book(String title, int numPages, String writer, String publisher) {
-         setTitle(title);
+    //CONSTRUCT
+    public Book(String title, int numPages, String author, String publisher) throws IllegalArgumentException {
+        setTitle(title);
+        setNumPages(numPages);
+        setAuthor(author);
+        setPublisher(publisher);
+    }
+
+    //GETTER E SETTER
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) throws IllegalArgumentException {
+        if (author == null || author.isEmpty()) {
+            throw new IllegalArgumentException("Author cannot be empty");
+        }
+        this.author = author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) throws IllegalArgumentException {
+        if (title == null || title.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+        this.title = title;
+    }
+
+    public int getNumPages() {
+        return numPages;
+    }
+
+    public void setNumPages(int numPages) throws IllegalArgumentException{
+        if (numPages <= 0) {
+            throw new IllegalArgumentException("Number of pages cannot be equal or minor than 0");
+        }
         this.numPages = numPages;
-        this.writer = writer;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) throws IllegalArgumentException{
+        if (publisher == null || publisher.isEmpty()) {
+            throw new IllegalArgumentException("Publisher cannot be empty");
+        }
         this.publisher = publisher;
     }
 
+    //Override
 
-//    VERIFY SETTER
-
-    private void checkString(String variable) throws IllegalArgumentException {
-        try {
-            if (!variable.isEmpty()) {
-                this.title = variable;
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Stringa non accettata!");
-
-        }
-
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", numPages=" + numPages +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                '}' + "\n";
     }
-
-    //    SETTER
-    public void setTitle(String title) {
-        checkString(title);
-    }
-
-    public void setNumPages(int numPages) {
-        this.numPages = numPages;
-    }
-
-    public void setWriter(String writer) {
-        checkString(writer);
-    }
-
-    public void setPublisher(String publisher) {
-        checkString(publisher);
-    }
-
 }
